@@ -1,4 +1,5 @@
 * {
+    box-sizing: border-box;
     font-family: 'Poppins',sans-serif;
 }
 
@@ -20,7 +21,7 @@
 }
 
 .box > input {
-    height:2rem;
+    height:3rem;
     background-color: #F0F3F5;
     border: none;
     padding:8px 12px;
@@ -41,4 +42,19 @@
 .box> input:focus-visible {
     border: none;
     outline: none;
+}
+
+.res {
+    flex: 1;
+    background: white;
+    box-shadow: 1px 10px 10px rgb(0 0 0 / 14%);
+    padding: 18px;
+    height: 97vh;
+    margin-left: 10px;
+}
+.front {
+    background: #FAFAFA;
+    padding: 14px;
+    width: 90%;
+    border-radius: 8px;
 }
