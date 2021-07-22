@@ -46,9 +46,38 @@ class QueueElement {
     }
 }
 
+class QueueProc {
+    constructor(element, priority,time) {
+        this.element = element
+        this.priority = priority
+        this.time = time
+    }
+
+    toString = () => {
+        return `(${this.priority},${this.time}) ${this.element}`
+    }
+}
+
+
 class QueuePriority {
     constructor() {
         this.items = []
+    }
+
+
+    enqueueProc = (elment, priority = 10,time=0) => {
+        let queueElement = new QueueProc(elment, priority,time)
+        let added = false;
+        for (let i = 0; i < this.items.length; i++) {
+            if (queueElement.priority < this.items[i].priority) { 
+                this.items.splice(i, 0, queueElement); 
+                added = true;
+                break; 
+            }
+        }
+        if (!added) {
+            this.items.push(queueElement); //{5}
+        }
     }
 
     //  add element in queue
@@ -65,6 +94,11 @@ class QueuePriority {
         if (!added) {
             this.items.push(queueElement); //{5}
         }
+    }
+
+    // remove the first elemet nin queue
+    dequeue = () => {
+        return this.items.shift()
     }
 
     front = () => {

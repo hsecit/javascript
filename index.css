@@ -58,3 +58,12 @@
     width: 90%;
     border-radius: 8px;
 }
+
+p{
+    padding: 11px 14px;
+    display: inline-flex;
+    border: 1px solid black;
+    gap: 11px;
+    margin-left: 14px;
+    background: #FAFA;
+}
