@@ -1,6 +1,18 @@
 import QueuePriority from './Queue.js'
+import { Processor } from './QueueWithTimer.js'
 
 const queue = new QueuePriority()
+
+const processor = new Processor()
+
+processor.addProcess('calulator operation', 29, 30)
+processor.addProcess('launch word', 69, 100)
+processor.addProcess('open google chrome', 56, 50)
+processor.addProcess('mailbox', 90, 19)
+
+// processor.show()
+
+processor.run()
 
 
 const priority = document.getElementById('priority')
@@ -29,7 +41,7 @@ const componentDidMount = () => {
     showFront()
     // delete the old elment 
     deleteElement()
-    
+
     for (let i = 0; i < queue.items.length; i++) {
         addElementToHtml(queue.items[i].toString())
     }

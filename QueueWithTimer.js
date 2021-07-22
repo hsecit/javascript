@@ -1,12 +1,32 @@
 // set timer for the front element in queue qnd dequeued it when it finished
 
+import EventEmitter from 'events'
 import QueuePriority from "./Queue.js";
 
 
+class Emitter extends EventEmitter { }
 
-class Processor {
+export class Processor {
     constructor() {
         this.queue = new QueuePriority()
+        this.emiter = new Emitter()
+        this.emitters()
+
+        // test 
+        setTimeout(() => {
+            this.emiter.emit('new_process','emit new process 1','39')
+        },2000)
+
+        setTimeout(() => {
+            this.emiter.emit('new_process','emit new process 2','70')
+        },3000)
+
+        setTimeout(() => {
+            this.emiter.emit('new_process','emit last one','100')
+        },10000)
+
+
+
     }
 
     addProcess = (process, priority, timeExec) => {
@@ -19,12 +39,21 @@ class Processor {
         return front
     }
 
-    async run() {
-        const end = this.queue.isEmpty()
-        while (!end) {
-          await this.timer(this.frontProcess().time)
-          if (end) break;
-        }
+    emitters = () => {
+        this.emiter.on('timer', () => {
+            if (this.queue.items.length !== 0) {
+                this.timer(this.frontProcess().time)
+            }
+
+        })
+
+        this.emiter.on('new_process',(element,priority) => {
+            this.addProcess(element,priority,40)
+        })
+    }
+
+     run() {
+        this.emiter.emit('timer')
     }
 
     async timer(time) {
@@ -37,19 +66,28 @@ class Processor {
         })
     }
 
+    async timerSignal(time) {
+        if (this.singnal == 'change') {
+
+        } else {
+            return await new Promise(resolve => {
+                setInterval(() => {
+                    this.queue.dequeue()
+                    console.log(`PROCESS_END: ${this.queue.front().element}`);
+                    this.show()
+                }, time * 100)
+            })
+        }
+    }
+
+    processHandler(event) {
+
+    }
+
     show = () => {
         console.log(this.queue.items)
     }
 }
 
 
-const processor = new Processor()
-
-processor.addProcess('calulator operation', 29, 30)
-processor.addProcess('launch word', 69, 100)
-processor.addProcess('open google chrome', 56, 50)
-processor.addProcess('mailbox', 90, 19)
-
-// processor.show()
-
-processor.run()
+ 

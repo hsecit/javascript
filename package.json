@@ -3,5 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "events": "^3.3.0"
+  }
 }

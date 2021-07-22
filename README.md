@@ -1,11 +1,11 @@
 # some js practice
 
-queue
+## Queue  
 
 ![](/home/hamza/startup/try.png)
 
 
-
-process simulation
+## Process Simulation
 
 ![](/home/hamza/startup/t.png)
+
